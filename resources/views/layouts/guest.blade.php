@@ -50,16 +50,17 @@ https://templatemo.com/tm-591-villa-agency
             <div class="row">
                 <div class="col-lg-8 col-md-8">
                     <ul class="info">
-                        <li><i class="fa fa-envelope"></i> info@company.com</li>
-                        <li><i class="fa fa-map"></i> Sunny Isles Beach, FL 33160</li>
+                        <li><i class="fa fa-envelope"></i> {{$company->company_email}}</li>
+                        <li><i class="fa fa-map"></i> {{$company->address}}</li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <ul class="social-links">
-                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                        <li><a href="https://x.com/minthu" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+
+                        <li><a href="{{$company->facebook}}"><i class="fab fa-facebook"></i></a></li>
+                        <li><a href="{{$company->twitter}}" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="{{$company->linkedin}}"><i class="fab fa-linkedin"></i></a></li>
+                        <li><a href="{{$company->instagram}}"><i class="fab fa-instagram"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -73,16 +74,16 @@ https://templatemo.com/tm-591-villa-agency
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
-                            <h1>Villa</h1>
+                        <a href="{{route('home')}}" class="logo">
+                         <img src="{{ asset('storage/' . $company->company_logo) }}" alt="">
+                         
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="index.html" class="active">Home</a></li>
-                            <li><a href="properties.html">Properties</a></li>
-                            <li><a href="property-details.html">Property Details</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="{{route('home')}}" class="active">Home</a></li>
+                            <li><a href="{{route('property')}}">Properties</a></li>
+                            <li><a href="{{route('contact')}}">Contact Us</a></li>
                             <li><a href="#"><i class="fa fa-calendar"></i> Schedule a visit</a></li>
                         </ul>
                         <a class='menu-trigger'>

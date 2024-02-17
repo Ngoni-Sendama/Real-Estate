@@ -13,6 +13,7 @@ class Apartment extends Model
         'category_id',
         'name',
         'city',
+        'slug',
         'images',
         'number_of_rooms',
         'number_of_bedrooms',

@@ -14,6 +14,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
+use Filament\Forms\Set;
 
 class ApartmentResource extends Resource
 {
@@ -28,7 +30,9 @@ class ApartmentResource extends Resource
                 Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('name')
-                            ->required(),
+                            ->required()
+                            ->live(onBlur: true)
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                         Forms\Components\TextInput::make('city')
                             ->required(),
                         Forms\Components\Textarea::make('description')
@@ -38,6 +42,10 @@ class ApartmentResource extends Resource
                     ])->columnSpan(8)->columns(2),
                 Section::make()
                     ->schema([
+                        Forms\Components\TextInput::make('slug')
+                        ->required()
+                        ->disabled()
+                        ->dehydrated(),
                         Forms\Components\Select::make('category_id')
                             ->required()
                             ->options(Category::all()->pluck('name', 'id'))

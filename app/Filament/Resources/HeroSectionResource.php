@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ContactResource\Pages;
-use App\Filament\Resources\ContactResource\RelationManagers;
-use App\Models\Contact;
+use App\Filament\Resources\HeroSectionResource\Pages;
+use App\Filament\Resources\HeroSectionResource\RelationManagers;
+use App\Models\HeroSection;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,32 +13,23 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ContactResource extends Resource
+class HeroSectionResource extends Resource
 {
-    protected static ?string $model = Contact::class;
+    protected static ?string $model = HeroSection::class;
 
-
-    protected static ?string $navigationGroup = 'Messages';
-
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
+    protected static ?string $navigationGroup = 'Settings';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('location')
                     ->required(),
-                Forms\Components\TextInput::make('email')
-                    ->email()
+                Forms\Components\TextInput::make('heading')
                     ->required(),
-                Forms\Components\TextInput::make('subject')
+                Forms\Components\FileUpload::make('image')
+                    ->image()
                     ->required(),
-                Forms\Components\Textarea::make('messsage')
-                    ->required()
-                    ->columnSpanFull(),
             ]);
     }
 
@@ -46,12 +37,11 @@ class ContactResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('location')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email')
+                Tables\Columns\TextColumn::make('heading')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('subject')
-                    ->searchable(),
+                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -78,7 +68,7 @@ class ContactResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageContacts::route('/'),
+            'index' => Pages\ManageHeroSections::route('/'),
         ];
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('properties', [PropertyController::class, 'index'])->name('property');
+Route::get('properties/{slug}', [PropertyController::class, 'show'])->name('property.details');
+
+Route::get('contact', [ContactController::class, 'index'])->name('contact');
